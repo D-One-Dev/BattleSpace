@@ -17,6 +17,7 @@ public class ObjectPlacer
 
     private List<ARRaycastHit> _hits = new List<ARRaycastHit>();
     private TrackableId _currentPlane;
+    private GameObject _objectPrefab;
 
     [Inject]
     public void Construct(DiContainer container, ARRaycastManager raycastManager, ARPlaneManager planeManager, Controls controls, GloballGameState globallGameState)
@@ -31,6 +32,8 @@ public class ObjectPlacer
         _controls.Enable();
 
         _globalGameState.OnStateChangeEvent += OnGameStateChanged;
+
+        _objectPrefab = _testPrefab;
     }
 
     private void Touch()
@@ -40,15 +43,23 @@ public class ObjectPlacer
 
     private void Raycast()
     {
-        if (_raycastManager.Raycast(_controls.Gameplay.PrimaryTouchPosition.ReadValue<Vector2>(), _hits, TrackableType.PlaneWithinPolygon))
+        if(_objectPrefab != null)
         {
-            Pose pose = _hits[0].pose;
-            if(_globalGameState.CurrentState == State.PlaneSelection)
+            if (_raycastManager.Raycast(_controls.Gameplay.PrimaryTouchPosition.ReadValue<Vector2>(), _hits, TrackableType.PlaneWithinPolygon))
             {
-                _currentPlane = _hits[0].trackableId;
-                _container.InstantiatePrefab(_testPrefab, pose.position, pose.rotation, null);
+                Pose pose = _hits[0].pose;
+                if(_globalGameState.CurrentState == State.PlaneSelection)
+                {
+                    _currentPlane = _hits[0].trackableId;
+                    _container.InstantiatePrefab(_objectPrefab, pose.position, pose.rotation, _hits[0].trackable.gameObject.transform);
+                    _objectPrefab = null;
 
-                _globalGameState.ChangeCurrentState(State.Gameplay);
+                    _globalGameState.ChangeCurrentState(State.Gameplay);
+                }
+                else if(_globalGameState.CurrentState == State.Gameplay)
+                {
+                    _container.InstantiatePrefab(_objectPrefab, pose.position, pose.rotation, _hits[0].trackable.gameObject.transform);
+                }
             }
         }
     }
@@ -67,5 +78,10 @@ public class ObjectPlacer
             default:
                 break;
         }
+    }
+
+    public void SetCurrentObject(GameObject obj)
+    {
+        _objectPrefab = obj;
     }
 }

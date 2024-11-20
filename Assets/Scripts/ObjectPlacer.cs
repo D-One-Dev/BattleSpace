@@ -7,7 +7,7 @@ using Zenject;
 public class ObjectPlacer
 {
     [Inject(Id = "TestPrefab")]
-    private readonly GameObject _testPrefab;
+    private readonly Spaceship _testPrefab;
 
     private ARRaycastManager _raycastManager;
     private ARPlaneManager _planeManager;
@@ -17,16 +17,18 @@ public class ObjectPlacer
 
     private List<ARRaycastHit> _hits = new List<ARRaycastHit>();
     private TrackableId _currentPlane;
-    private GameObject _objectPrefab;
+    private Spaceship _objectPrefab;
+    private PlayerMoney _playerMoney;
 
     [Inject]
-    public void Construct(DiContainer container, ARRaycastManager raycastManager, ARPlaneManager planeManager, Controls controls, GloballGameState globallGameState)
+    public void Construct(DiContainer container, ARRaycastManager raycastManager, ARPlaneManager planeManager, Controls controls, GloballGameState globallGameState, PlayerMoney playerMoney)
     {
         _container = container;
         _raycastManager = raycastManager;
         _planeManager = planeManager;
         _controls = controls;
         _globalGameState = globallGameState;
+        _playerMoney = playerMoney;
 
         _controls.Gameplay.PrimaryTouch.performed += ctx => Touch();
         _controls.Enable();
@@ -51,14 +53,19 @@ public class ObjectPlacer
                 if(_globalGameState.CurrentState == State.PlaneSelection)
                 {
                     _currentPlane = _hits[0].trackableId;
-                    _container.InstantiatePrefab(_objectPrefab, pose.position, pose.rotation, _hits[0].trackable.gameObject.transform);
+                    _container.InstantiatePrefab(_objectPrefab.Prefab, pose.position, pose.rotation, _hits[0].trackable.gameObject.transform);
                     _objectPrefab = null;
 
                     _globalGameState.ChangeCurrentState(State.Gameplay);
                 }
                 else if(_globalGameState.CurrentState == State.Gameplay)
                 {
-                    _container.InstantiatePrefab(_objectPrefab, pose.position, pose.rotation, _hits[0].trackable.gameObject.transform);
+                    if (_playerMoney.CheckPurchaseAbility(_objectPrefab.Cost))
+                    {
+                        _playerMoney.BuyItem(_objectPrefab.Cost);
+                        _container.InstantiatePrefab(_objectPrefab.Prefab, pose.position, pose.rotation, _hits[0].trackable.gameObject.transform);
+                        _objectPrefab = null;
+                    }
                 }
             }
         }
@@ -80,7 +87,7 @@ public class ObjectPlacer
         }
     }
 
-    public void SetCurrentObject(GameObject obj)
+    public void SetCurrentObject(Spaceship obj)
     {
         _objectPrefab = obj;
     }

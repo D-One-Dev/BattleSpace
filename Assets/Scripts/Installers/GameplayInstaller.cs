@@ -3,10 +3,10 @@ using Zenject;
 
 public class GameplayInstaller : MonoInstaller
 {
-    [SerializeField] private GameObject testPrefab;
+    [SerializeField] private Spaceship testPrefab;
     public override void InstallBindings()
     {
-        this.Container.Bind<GameObject>()
+        this.Container.Bind<Spaceship>()
             .WithId("TestPrefab")
             .FromInstance(testPrefab)
             .AsTransient();

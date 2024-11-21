@@ -1,7 +1,7 @@
 using System;
 using Zenject;
 
-public class GloballGameState : IInitializable
+public class GlobalGameState : IInitializable
 {
     public State CurrentState{ get; private set; }
     public event Action<State> OnStateChangeEvent;

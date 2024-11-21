@@ -12,6 +12,8 @@ public class SystemInstaller : MonoInstaller
     [SerializeField] private Spaceship[] spaceships;
     [SerializeField] private SpaceshipSelector spaceshipsSelector;
     [SerializeField] private TMP_Text moneyText;
+    [SerializeField] private GameObject planeSelectScreen;
+    [SerializeField] private GameObject gameplayScreen;
     public override void InstallBindings()
     {
         this.Container.Bind<ARRaycastManager>()
@@ -29,7 +31,7 @@ public class SystemInstaller : MonoInstaller
             .AsSingle()
             .NonLazy();
 
-        this.Container.BindInterfacesAndSelfTo<GloballGameState>()
+        this.Container.BindInterfacesAndSelfTo<GlobalGameState>()
             .FromNew()
             .AsSingle()
             .NonLazy();
@@ -56,6 +58,21 @@ public class SystemInstaller : MonoInstaller
         this.Container.Bind<TMP_Text>()
             .WithId("MoneyText")
             .FromInstance(moneyText)
+            .AsTransient();
+
+        this.Container.Bind<UIController>()
+            .FromNew()
+            .AsSingle()
+            .NonLazy();
+
+        this.Container.Bind<GameObject>()
+            .WithId("PlaneSelectScreen")
+            .FromInstance(planeSelectScreen)
+            .AsTransient();
+
+        this.Container.Bind<GameObject>()
+            .WithId("GameplayScreen")
+            .FromInstance(gameplayScreen)
             .AsTransient();
     }
 }

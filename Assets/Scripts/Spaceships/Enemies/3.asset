@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f44b30c0f6bb4574ab9d4ed58cbcf8b6, type: 3}
   m_Name: 3
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 9116030087472781677, guid: 951c81cd67c4d914abf2cb48f85ac47f, type: 3}
+  Prefab: {fileID: 9116030087472781677, guid: 1a23b02d115a2a04fa520fba88b8de66, type: 3}
   MinSpawnWave: 10

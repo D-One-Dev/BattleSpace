@@ -48,7 +48,7 @@ public class EnemyWaves
         }
         foreach((GameObject, Vector3) enemy in ships)
         {
-            _objectPlacer.PlaceObject(enemy.Item1, enemy.Item2, Quaternion.identity);
+            _objectPlacer.PlaceEnemyShip(enemy.Item1, enemy.Item2, Quaternion.identity);
         }
         _waveCount++;
         _installer.StartCoroutine(NextWaveTimer(_timeBetweenWaves));

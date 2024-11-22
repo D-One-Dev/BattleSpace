@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b747413aa55b3545ab5fed2706849e5, type: 3}
   m_Name: 2
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 9134652724535056772, guid: 7cc8fd4288fdcbc4db93fc5f41b3e97b, type: 3}
+  Prefab: {fileID: 9134652724535056772, guid: c6bd295e3b0ed7148b8746a4ff0bd589, type: 3}
   Cost: 20

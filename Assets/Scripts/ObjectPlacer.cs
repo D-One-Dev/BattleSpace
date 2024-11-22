@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
@@ -22,9 +23,11 @@ public class ObjectPlacer
     private Spaceship _objectPrefab;
     private PlayerMoney _playerMoney;
     private Transform _worldOrigin;
+    private NavMeshSurface _navMeshSurface;
 
     [Inject]
-    public void Construct(DiContainer container, ARRaycastManager raycastManager, ARPlaneManager planeManager, Controls controls, GlobalGameState globallGameState, PlayerMoney playerMoney)
+    public void Construct(DiContainer container, ARRaycastManager raycastManager, ARPlaneManager planeManager, Controls controls, GlobalGameState globallGameState, PlayerMoney playerMoney, 
+        NavMeshSurface navMeshSurface)
     {
         _container = container;
         _raycastManager = raycastManager;
@@ -32,6 +35,7 @@ public class ObjectPlacer
         _controls = controls;
         _globalGameState = globallGameState;
         _playerMoney = playerMoney;
+        _navMeshSurface = navMeshSurface;
 
         _controls.Gameplay.PrimaryTouch.performed += ctx => Touch();
         _controls.Enable();
@@ -57,6 +61,9 @@ public class ObjectPlacer
                 {
                     _currentPlane = _hits[0].trackableId;
                     _worldOrigin = _hits[0].trackable.gameObject.transform;
+                    _navMeshSurface.transform.SetParent(_worldOrigin);
+                    _navMeshSurface.transform.position = pose.position;
+                    _navMeshSurface.UpdateNavMesh(_navMeshSurface.navMeshData);
                     playerBase = PlaceObject(_objectPrefab.Prefab, pose.position, pose.rotation).transform;
                     _objectPrefab = null;
 
@@ -83,8 +90,10 @@ public class ObjectPlacer
                 foreach(var plane in _planeManager.trackables)
                 {
                     if(plane.trackableId != _currentPlane) plane.gameObject.SetActive(false);
+                    else plane.gameObject.isStatic = true;
                 }
                 _planeManager.requestedDetectionMode = PlaneDetectionMode.None;
+                _navMeshSurface.BuildNavMesh();
                 break;
             default:
                 break;
@@ -99,5 +108,10 @@ public class ObjectPlacer
     public GameObject PlaceObject(GameObject prefab, Vector3 position, Quaternion rotation)
     {
         return _container.InstantiatePrefab(prefab, position, rotation, _worldOrigin);
+    }
+
+    public GameObject PlaceEnemyShip(GameObject prefab, Vector3 position, Quaternion rotation)
+    {
+        return _container.InstantiatePrefab(prefab, position, rotation, _navMeshSurface.transform);
     }
 }

@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
@@ -14,6 +15,8 @@ public class SystemInstaller : MonoInstaller
     [SerializeField] private TMP_Text moneyText;
     [SerializeField] private GameObject planeSelectScreen;
     [SerializeField] private GameObject gameplayScreen;
+    [SerializeField] private NavMeshSurface navMeshSurface;
+    [SerializeField] private LayerMask playerShipsLayer;
     public override void InstallBindings()
     {
         this.Container.Bind<ARRaycastManager>()
@@ -73,6 +76,15 @@ public class SystemInstaller : MonoInstaller
         this.Container.Bind<GameObject>()
             .WithId("GameplayScreen")
             .FromInstance(gameplayScreen)
+            .AsTransient();
+
+        this.Container.Bind<NavMeshSurface>()
+            .FromInstance(navMeshSurface)
+            .AsSingle();
+
+        this.Container.Bind<LayerMask>()
+            .WithId("PlayerShipsLayer")
+            .FromInstance(playerShipsLayer)
             .AsTransient();
     }
 }

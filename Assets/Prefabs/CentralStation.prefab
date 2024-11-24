@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1313874877159580709}
   - component: {fileID: 2368486556429615420}
   - component: {fileID: 2855313307416157582}
-  - component: {fileID: 4284052214844482045}
   m_Layer: 6
   m_Name: RL_station_base_01_low
   m_TagString: Untagged
@@ -87,28 +86,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &4284052214844482045
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1103207845296333717}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -5374748487161260636, guid: 391d02c1ffbde664cba6d8df2ce51dfc, type: 3}
 --- !u!1 &3278591724301801067
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,6 +95,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6454248119960644042}
+  - component: {fileID: 4463675668037632703}
+  - component: {fileID: 3682762570851312583}
   m_Layer: 6
   m_Name: CentralStation
   m_TagString: Untagged
@@ -142,6 +121,42 @@ Transform:
   - {fileID: 1313874877159580709}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4463675668037632703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3278591724301801067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fd3cb038a871ae4eb06cf10c02cb67d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 10
+--- !u!136 &3682762570851312583
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3278591724301801067}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.41
+  m_Height: 1.45
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.44, z: 0}
 --- !u!1 &4647565030214027695
 GameObject:
   m_ObjectHideFlags: 0
@@ -153,7 +168,6 @@ GameObject:
   - component: {fileID: 2447650332418904591}
   - component: {fileID: 7874691643783809124}
   - component: {fileID: 6987569379267051822}
-  - component: {fileID: 5541179851439033995}
   m_Layer: 6
   m_Name: RL_station_antena_01_low
   m_TagString: Untagged
@@ -229,25 +243,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &5541179851439033995
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4647565030214027695}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 3400517348968716893, guid: 391d02c1ffbde664cba6d8df2ce51dfc, type: 3}

@@ -1,11 +1,21 @@
 using System.Collections;
 using UnityEngine;
+using Zenject;
 
 public class ShootingEntity : MonoBehaviour
 {
     [SerializeField] private float recoilTime;
+    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private Transform shootPoint;
+    private ObjectPlacer _objectPlacer;
     private Transform _target;
     private bool _canShoot = true;
+
+    [Inject]
+    public void Construct(ObjectPlacer objectPlacer)
+    {
+        _objectPlacer = objectPlacer;
+    }
 
     private void Start()
     {
@@ -34,6 +44,7 @@ public class ShootingEntity : MonoBehaviour
 
     private void Shoot()
     {
-        Debug.Log("Shooting at " + _target.name);
+        GameObject projectile = Instantiate(projectilePrefab, shootPoint.position, Quaternion.identity, _objectPlacer.WorldOrigin);
+        projectile.transform.up = _target.position - projectile.transform.position;
     }
 }

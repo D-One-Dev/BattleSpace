@@ -33,7 +33,7 @@ public class EnemyWaves
 
     private void SpawnWave()
     {
-        Debug.Log("Zhopa");
+        Debug.Log("New wave started");
         int shipsCount = Random.Range(_waveCount, _waveCount * 2);
         (GameObject, Vector3)[] ships = new (GameObject, Vector3)[shipsCount];
         List<EnemySpaceship> awailiableSpaceships = new List<EnemySpaceship>();

@@ -22,7 +22,7 @@ public class ObjectPlacer
     private TrackableId _currentPlane;
     private Spaceship _objectPrefab;
     private PlayerMoney _playerMoney;
-    private Transform _worldOrigin;
+    public Transform WorldOrigin { get; private set; }
     private NavMeshSurface _navMeshSurface;
 
     [Inject]
@@ -60,8 +60,8 @@ public class ObjectPlacer
                 if(_globalGameState.CurrentState == State.PlaneSelection)
                 {
                     _currentPlane = _hits[0].trackableId;
-                    _worldOrigin = _hits[0].trackable.gameObject.transform;
-                    _navMeshSurface.transform.SetParent(_worldOrigin);
+                    WorldOrigin = _hits[0].trackable.gameObject.transform;
+                    _navMeshSurface.transform.SetParent(WorldOrigin);
                     _navMeshSurface.transform.position = pose.position;
                     _navMeshSurface.UpdateNavMesh(_navMeshSurface.navMeshData);
                     playerBase = PlaceObject(_objectPrefab.Prefab, pose.position, pose.rotation).transform;
@@ -107,7 +107,7 @@ public class ObjectPlacer
 
     public GameObject PlaceObject(GameObject prefab, Vector3 position, Quaternion rotation)
     {
-        return _container.InstantiatePrefab(prefab, position, rotation, _worldOrigin);
+        return _container.InstantiatePrefab(prefab, position, rotation, WorldOrigin);
     }
 
     public GameObject PlaceEnemyShip(GameObject prefab, Vector3 position, Quaternion rotation)

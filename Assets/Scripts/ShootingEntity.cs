@@ -7,6 +7,7 @@ public class ShootingEntity : MonoBehaviour
     [SerializeField] private float recoilTime;
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform shootPoint;
+    [SerializeField] private ParticleSystem ps;
     private ObjectPlacer _objectPlacer;
     private Transform _target;
     private bool _canShoot = true;
@@ -46,5 +47,6 @@ public class ShootingEntity : MonoBehaviour
     {
         GameObject projectile = Instantiate(projectilePrefab, shootPoint.position, Quaternion.identity, _objectPlacer.WorldOrigin);
         projectile.transform.up = _target.position - projectile.transform.position;
+        ps.Play();
     }
 }

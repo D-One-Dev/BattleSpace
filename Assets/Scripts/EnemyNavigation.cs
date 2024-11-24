@@ -35,25 +35,25 @@ public class EnemyNavigation : MonoBehaviour
         {
             foreach(Collider hit in hits)
             {
-                if(hit.gameObject.transform != _currentTarget &&
+                if(_currentTarget != null && hit.gameObject.transform != _currentTarget &&
                     Vector3.Distance(transform.position, hit.gameObject.transform.position) <
                     Vector3.Distance(transform.position, _currentTarget.position))
                 {
                     _currentTarget = hit.gameObject.transform;
                 }
             }
-            _agent.destination = _currentTarget.position;
+            if(_currentTarget != null) _agent.destination = _currentTarget.position;
         }
-        else
+        else if(_playerBase != null)
         {
             _currentTarget = _playerBase;
             _agent.destination = _currentTarget.position;
         }
 
         Collider[] shoothits = Physics.OverlapSphere(transform.position, shootRadius, _playerShipsLayer);
-        if (hits.Length > 0)
+        if (shoothits.Length > 0)
         {
-            foreach (Collider hit in hits)
+            foreach (Collider hit in shoothits)
             {
                 if (hit.gameObject.transform == _currentTarget)
                 {

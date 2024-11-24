@@ -95,8 +95,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6454248119960644042}
-  - component: {fileID: 4463675668037632703}
   - component: {fileID: 3682762570851312583}
+  - component: {fileID: 2801210522804251555}
   m_Layer: 6
   m_Name: CentralStation
   m_TagString: Untagged
@@ -121,19 +121,6 @@ Transform:
   - {fileID: 1313874877159580709}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4463675668037632703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3278591724301801067}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fd3cb038a871ae4eb06cf10c02cb67d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 10
 --- !u!136 &3682762570851312583
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -157,6 +144,19 @@ CapsuleCollider:
   m_Height: 1.45
   m_Direction: 1
   m_Center: {x: 0, y: 0.44, z: 0}
+--- !u!114 &2801210522804251555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3278591724301801067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63572cb8072d5454aa5e09e09b46e861, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
 --- !u!1 &4647565030214027695
 GameObject:
   m_ObjectHideFlags: 0

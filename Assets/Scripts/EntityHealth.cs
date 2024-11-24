@@ -2,18 +2,24 @@ using UnityEngine;
 
 public class EntityHealth : MonoBehaviour
 {
-    [SerializeField] private int health;
+    [SerializeField] protected int health;
     public void TakeDamage()
     {
         health--;
+        OnDamage();
         if(health <= 0)
         {
             OnDeath();
         }
     }
 
-    protected void OnDeath()
+    protected virtual void OnDeath()
     {
         Destroy(gameObject);
+    }
+
+    protected virtual void OnDamage()
+    {
+
     }
 }

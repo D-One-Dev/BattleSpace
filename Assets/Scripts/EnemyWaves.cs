@@ -57,7 +57,7 @@ public class EnemyWaves
     private IEnumerator NextWaveTimer(float time)
     {
         yield return new WaitForSeconds(time);
-        SpawnWave();
+        if(_playerBase != null)SpawnWave();
     }
 
     private Vector3 GetRandomPointBetweenCircles()

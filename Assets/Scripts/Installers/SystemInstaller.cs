@@ -17,6 +17,9 @@ public class SystemInstaller : MonoInstaller
     [SerializeField] private GameObject gameplayScreen;
     [SerializeField] private NavMeshSurface navMeshSurface;
     [SerializeField] private LayerMask playerShipsLayer;
+    [SerializeField] private LayerMask enemyShipsLayer;
+    [SerializeField] private Image playerBaseHealthbar;
+    [SerializeField] private TMP_Text playerBaseHealth;
     public override void InstallBindings()
     {
         this.Container.Bind<ARRaycastManager>()
@@ -85,6 +88,21 @@ public class SystemInstaller : MonoInstaller
         this.Container.Bind<LayerMask>()
             .WithId("PlayerShipsLayer")
             .FromInstance(playerShipsLayer)
+            .AsTransient();
+
+        this.Container.Bind<Image>()
+            .WithId("PlayerBaseHealthbar")
+            .FromInstance(playerBaseHealthbar)
+            .AsTransient();
+
+        this.Container.Bind<TMP_Text>()
+            .WithId("BaseHealthText")
+            .FromInstance(playerBaseHealth)
+            .AsTransient();
+
+        this.Container.Bind<LayerMask>()
+            .WithId("EnemyShipsLayer")
+            .FromInstance(enemyShipsLayer)
             .AsTransient();
     }
 }

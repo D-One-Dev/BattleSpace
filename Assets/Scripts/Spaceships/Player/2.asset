@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Prefab: {fileID: 9134652724535056772, guid: c6bd295e3b0ed7148b8746a4ff0bd589, type: 3}
   Cost: 20
+  Description: 'Cargo ship, good armor but bad guns. Cost: 20'

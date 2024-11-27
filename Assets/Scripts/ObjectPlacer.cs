@@ -11,7 +11,8 @@ public class ObjectPlacer
 
     [Inject(Id = "TestPrefab")]
     private readonly Spaceship _testPrefab;
-
+    [Inject(Id = "NavMeshHolder")]
+    private readonly Transform _navMeshHolder;
     private ARRaycastManager _raycastManager;
     private ARPlaneManager _planeManager;
     private Controls _controls;
@@ -24,10 +25,12 @@ public class ObjectPlacer
     private PlayerMoney _playerMoney;
     public Transform WorldOrigin { get; private set; }
     private NavMeshSurface _navMeshSurface;
+    private SpaceshipSelector _spaceshipSelector;
+    public float RelativeY { get; private set; }
 
     [Inject]
     public void Construct(DiContainer container, ARRaycastManager raycastManager, ARPlaneManager planeManager, Controls controls, GlobalGameState globallGameState, PlayerMoney playerMoney, 
-        NavMeshSurface navMeshSurface)
+        NavMeshSurface navMeshSurface, SpaceshipSelector spaceshipSelector)
     {
         _container = container;
         _raycastManager = raycastManager;
@@ -43,6 +46,7 @@ public class ObjectPlacer
         _globalGameState.OnStateChangeEvent += OnGameStateChanged;
 
         _objectPrefab = _testPrefab;
+        _spaceshipSelector = spaceshipSelector;
     }
 
     private void Touch()
@@ -61,9 +65,9 @@ public class ObjectPlacer
                 {
                     _currentPlane = _hits[0].trackableId;
                     WorldOrigin = _hits[0].trackable.gameObject.transform;
-                    _navMeshSurface.transform.SetParent(WorldOrigin);
-                    _navMeshSurface.transform.position = pose.position;
-                    _navMeshSurface.UpdateNavMesh(_navMeshSurface.navMeshData);
+                    RelativeY = pose.position.y;
+                    _navMeshHolder.SetParent(WorldOrigin);
+                    _navMeshHolder.transform.position = pose.position;
                     playerBase = PlaceObject(_objectPrefab.Prefab, pose.position, pose.rotation).transform;
                     _objectPrefab = null;
 
@@ -76,6 +80,7 @@ public class ObjectPlacer
                         _playerMoney.BuyItem(_objectPrefab.Cost);
                         PlaceObject(_objectPrefab.Prefab, pose.position, pose.rotation);
                         _objectPrefab = null;
+                        _spaceshipSelector.ClearSpaceship();
                     }
                 }
             }

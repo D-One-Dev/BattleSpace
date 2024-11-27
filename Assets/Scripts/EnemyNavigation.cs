@@ -35,9 +35,9 @@ public class EnemyNavigation : MonoBehaviour
         {
             foreach(Collider hit in hits)
             {
-                if(_currentTarget != null && hit.gameObject.transform != _currentTarget &&
+                if(_currentTarget == null || (_currentTarget != null && hit.gameObject.transform != _currentTarget &&
                     Vector3.Distance(transform.position, hit.gameObject.transform.position) <
-                    Vector3.Distance(transform.position, _currentTarget.position))
+                    Vector3.Distance(transform.position, _currentTarget.position)))
                 {
                     _currentTarget = hit.gameObject.transform;
                 }

@@ -5,4 +5,5 @@ public class Spaceship : ScriptableObject
 {
     public GameObject Prefab;
     public int Cost;
+    public string Description;
 }

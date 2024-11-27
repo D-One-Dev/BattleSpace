@@ -21,6 +21,8 @@ public class SystemInstaller : MonoInstaller
     [SerializeField] private LayerMask enemyShipsLayer;
     [SerializeField] private Image playerBaseHealthbar;
     [SerializeField] private TMP_Text playerBaseHealth;
+    [SerializeField] private TMP_Text shipDescription;
+    [SerializeField] private Transform navMeshHolder;
     public override void InstallBindings()
     {
         this.Container.Bind<ARRaycastManager>()
@@ -114,6 +116,16 @@ public class SystemInstaller : MonoInstaller
         this.Container.Bind<GameObject>()
             .WithId("DeathScreen")
             .FromInstance(deathScreen)
+            .AsTransient();
+
+        this.Container.Bind<TMP_Text>()
+            .WithId("ShipDescription")
+            .FromInstance(shipDescription)
+            .AsTransient();
+
+        this.Container.Bind<Transform>()
+            .WithId("NavMeshHolder")
+            .FromInstance(navMeshHolder)
             .AsTransient();
     }
 }

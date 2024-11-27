@@ -165,7 +165,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 0.08527182
-  m_BaseOffset: 0.04263591
+  m_BaseOffset: -0.02
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &696187142053046280
@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf767119f026fca43bc004cea02f3ad7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recoilTime: 1
+  recoilTime: 2
   projectilePrefab: {fileID: 8717707471456081153, guid: eeef10901f084e44abbd8fcf8b07f6f0,
     type: 3}
   shootPoint: {fileID: 2337330827995354993}

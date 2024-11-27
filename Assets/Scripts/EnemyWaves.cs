@@ -70,8 +70,10 @@ public class EnemyWaves
         while (_distance < _innerRadius);
         float x = _distance * Mathf.Cos(_angle);
         float z = _distance * Mathf.Sin(_angle);
+        Vector3 pos = _playerBase.position + new Vector3(x, 0f, z);
+        pos.y = _objectPlacer.RelativeY;
 
-        return _playerBase.position + new Vector3(x, 0f, z);
+        return pos;
     }
 
     private void SetPlayerBase(State state)

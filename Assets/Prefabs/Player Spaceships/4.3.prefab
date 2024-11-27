@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf767119f026fca43bc004cea02f3ad7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recoilTime: 1
+  recoilTime: 0.375
   projectilePrefab: {fileID: 8717707471456081153, guid: 9811193355a190a45b40076646cda9a9,
     type: 3}
   shootPoint: {fileID: 922758839863672826}

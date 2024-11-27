@@ -181,7 +181,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 0.08527182
-  m_BaseOffset: 0.04263591
+  m_BaseOffset: -0.02
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &-7319760289340247937
@@ -196,7 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf767119f026fca43bc004cea02f3ad7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recoilTime: 1
+  recoilTime: 3
   projectilePrefab: {fileID: 8717707471456081153, guid: eeef10901f084e44abbd8fcf8b07f6f0,
     type: 3}
   shootPoint: {fileID: 5826144967741681149}
@@ -213,7 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 381f3cc65b51424469bacede4db522fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 5
+  health: 10
   shipCost: 20
 --- !u!1001 &6562902772416471011
 PrefabInstance:

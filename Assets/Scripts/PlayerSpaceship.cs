@@ -15,6 +15,7 @@ public class PlayerSpaceship : MonoBehaviour
         {
             Vector3 target = _currentTarget.position - transform.position;
             transform.forward = new Vector3(target.x, transform.forward.y, target.z);
+            transform.localEulerAngles = new Vector3(0f, transform.localEulerAngles.y, transform.localEulerAngles.z);
         }
 
         Collider[] hits = Physics.OverlapSphere(transform.position, spaceshipDetectRadius, _enemyShipsLayer);

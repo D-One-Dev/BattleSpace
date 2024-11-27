@@ -15,6 +15,7 @@ public class SystemInstaller : MonoInstaller
     [SerializeField] private TMP_Text moneyText;
     [SerializeField] private GameObject planeSelectScreen;
     [SerializeField] private GameObject gameplayScreen;
+    [SerializeField] private GameObject deathScreen;
     [SerializeField] private NavMeshSurface navMeshSurface;
     [SerializeField] private LayerMask playerShipsLayer;
     [SerializeField] private LayerMask enemyShipsLayer;
@@ -103,6 +104,16 @@ public class SystemInstaller : MonoInstaller
         this.Container.Bind<LayerMask>()
             .WithId("EnemyShipsLayer")
             .FromInstance(enemyShipsLayer)
+            .AsTransient();
+
+        this.Container.Bind<ShipTap>()
+            .FromNew()
+            .AsSingle()
+            .NonLazy();
+
+        this.Container.Bind<GameObject>()
+            .WithId("DeathScreen")
+            .FromInstance(deathScreen)
             .AsTransient();
     }
 }

@@ -22,5 +22,6 @@ public enum State
 {
     None = 0,
     PlaneSelection = 1,
-    Gameplay = 2
+    Gameplay = 2,
+    Death = 3
 }

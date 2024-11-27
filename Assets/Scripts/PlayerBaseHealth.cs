@@ -10,6 +10,13 @@ public class PlayerBaseHealth : EntityHealth
     private readonly Image _healtbar;
     [Inject(Id = "BaseHealthText")]
     private readonly TMP_Text _baseHealthText;
+    private GlobalGameState _globalGameState;
+
+    [Inject]
+    public void Construct(GlobalGameState globalGameState)
+    {
+        _globalGameState = globalGameState;
+    }
 
     private void Start()
     {
@@ -22,6 +29,7 @@ public class PlayerBaseHealth : EntityHealth
     {
         Time.timeScale = 0f;
         Debug.Log("Death");
+        _globalGameState.ChangeCurrentState(State.Death);
     }
 
     protected override void OnDamage()
